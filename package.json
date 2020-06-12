@@ -1,0 +1,24 @@
+{
+  "name": "laptopstore",
+  "version": "1.0.0",
+  "description": "laptopstore app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nparsley/laptopstore.git"
+  },
+  "keywords": [
+    "laptopstore"
+  ],
+  "author": "Nick Parsley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nparsley/laptopstore/issues"
+  },
+  "engines": {
+    "node": "10.19.0"
+  }
+}
