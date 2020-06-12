@@ -1,0 +1,39 @@
+{
+    "tasks": [
+        {
+            "type": "che",
+            "label": "stop the web app",
+            "command": "node_server_pids=$(pgrep -fx '.*nodemon (--inspect )?app.js' | tr \"\\\\n\" \" \") && echo \"Stopping node server with PIDs: ${node_server_pids}\" &&  kill -15 ${node_server_pids} &>/dev/null && echo 'Done.'",
+            "target": {
+                "component": "nodejs"
+            }
+        },
+        {
+            "type": "che",
+            "label": "download dependencies",
+            "command": "npm install",
+            "target": {
+                "workingDir": "${CHE_PROJECTS_ROOT}/nodejs-web-app/app",
+                "component": "nodejs"
+            }
+        },
+        {
+            "type": "che",
+            "label": "run the web app (debugging enabled)",
+            "command": "nodemon --inspect app.js",
+            "target": {
+                "workingDir": "${CHE_PROJECTS_ROOT}/nodejs-web-app/app",
+                "component": "nodejs"
+            }
+        },
+        {
+            "type": "che",
+            "label": "run the web app",
+            "command": "nodemon app.js",
+            "target": {
+                "workingDir": "${CHE_PROJECTS_ROOT}/nodejs-web-app/app",
+                "component": "nodejs"
+            }
+        }
+    ]
+}
