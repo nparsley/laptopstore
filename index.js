@@ -15,8 +15,14 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, { 'Content-type': 'text/html'});
         
         fs.readFile(`${__dirname}/templates/template-overview.html`, 'utf-8', (err, data) => {
-            
-            res.end(data);
+            let overviewOutput = data;
+            fs.readFile(`${__dirname}/templates/template-card.html`, 'utf-8', (err, data) => {
+                
+                const cardsOutput = laptopData.map(el => replaceTemplate(data, el)).join('');
+                overviewOutput = overviewOutput.replace('{%CARDS%}', cardsOutput)
+
+                res.end(overviewOutput);
+            });
         });
 
 
@@ -28,6 +34,13 @@ const server = http.createServer((req, res) => {
             const laptop = laptopData[id];
             const output = replaceTemplate(data, laptop);
             res.end(output);
+        });
+
+    //IMAGES
+    } else if ((/\.(jpg|jpeg|png|gif)$/i).test(pathName)) {
+        fs.readFile(`${__dirname}/data/img${pathName}`, (err, data) => {
+            res.writeHead(200, { 'Content-type': 'image/jpg'});
+            res.end(data);
         });
 
     //URL NOT FOUND
